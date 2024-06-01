@@ -35,9 +35,6 @@ public class Controller {
     public ItemDescriptionDTO searchItem(String identifier) throws NoSuchIdentifierException, DatabaseCallException {
         ItemDescriptionDTO item = InventorySystem.checkIfItemExists(identifier);
 
-        if (item == null) {
-            throw new NoSuchIdentifierException(identifier);
-        }
         return item;
     }
 
@@ -46,11 +43,7 @@ public class Controller {
      * sale, if it exists in the inventory.
      */
     public void registerItem(ItemDescriptionDTO item, int quantity) {
-        if (item != null) {
-            sale.addItem(item, quantity);
-        } else {
-            //Identifier invalid. 
-        }
+        sale.addItem(item, quantity);
     }
 
     /**

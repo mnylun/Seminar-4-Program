@@ -1,2 +1,2 @@
-There was an exception which prevented the program from fully functioning. Message logged: There is no item with this identifier: Pear. 
-There was an exception which prevented the program from fully functioning. Message logged: There is no item with this identifier: Orange. 
+There was an exception which prevented the program from fully functioning. Error: There is no item with this identifier: Pear. 
+There was an exception which prevented the program from fully functioning. Error: There is no item with this identifier: Orange. 

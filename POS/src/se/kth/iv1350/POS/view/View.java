@@ -65,8 +65,15 @@ public class View {
             controller.registerItem(item, 11);
         } catch (Exception e) {
             e.getCause();
-            System.out.println(e.getMessage());
-            exceptionsLog.log("There was an exception which prevented the program from fully functioning. Message logged: " + e.getMessage());
+            String message = "";
+            if (e instanceof NoSuchIdentifierException) {
+                NoSuchIdentifierException nsie = (NoSuchIdentifierException) e;
+                message = "There is no item with this identifier: " + nsie.getIdentifierWhichDoesNotExist() + ". ";
+            } else if (e instanceof DatabaseCallException) {
+                message = "For some reason the database could not be reached. ";
+            }
+            System.out.println(message);
+            exceptionsLog.log("There was an exception which prevented the program from fully functioning. Error: " + message);
         }
     }
 }

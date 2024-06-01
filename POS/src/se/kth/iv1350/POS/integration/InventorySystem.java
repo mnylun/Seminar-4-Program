@@ -1,6 +1,7 @@
 package se.kth.iv1350.POS.integration;
 
 import java.util.ArrayList;
+import se.kth.iv1350.POS.controller.NoSuchIdentifierException;
 import se.kth.iv1350.POS.model.*;
 
 /**
@@ -8,12 +9,13 @@ import se.kth.iv1350.POS.model.*;
  * @author Martin Nylund
  */
 public class InventorySystem {
-    
+
     static ArrayList<CartItem> availableItems;
     static boolean databaseConnected = true;
-    
+
     /**
-     * Creates the inventory for the store, manually in this case for the test run. 
+     * Creates the inventory for the store, manually in this case for the test
+     * run.
      */
     public InventorySystem() {
         availableItems = new ArrayList<CartItem>();
@@ -37,7 +39,7 @@ public class InventorySystem {
      * name.
      * @return
      */
-    public static ItemDescriptionDTO checkIfItemExists(String identifier) throws DatabaseCallException {
+    public static ItemDescriptionDTO checkIfItemExists(String identifier) throws DatabaseCallException, NoSuchIdentifierException {
         if (databaseConnected == false) {
             throw new DatabaseCallException();
         }
@@ -46,13 +48,14 @@ public class InventorySystem {
                 return c.getItemDescriptionDTO();
             }
         }
-        return null;
+        throw new NoSuchIdentifierException(identifier);
     }
-    
+
     /**
-     * Method for updating the inventory, when items are sold. 
-     * Subtracting the quantity of the item sold from the quantity of the item in the inventory. 
-     * @param sale 
+     * Method for updating the inventory, when items are sold. Subtracting the
+     * quantity of the item sold from the quantity of the item in the inventory.
+     *
+     * @param sale
      */
     public static void update(Sale sale) {
         for (CartItem c : sale.getCartItems()) {
@@ -62,8 +65,8 @@ public class InventorySystem {
                 }
             }
         }
-    }  
-    
+    }
+
     public void setDatabaseConnected(boolean b) {
         databaseConnected = b;
     }

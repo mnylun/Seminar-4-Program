@@ -13,7 +13,7 @@ public class NoSuchIdentifierException extends Exception {
      * @param identifier The item which does not exist. 
      */
     public NoSuchIdentifierException(String identifier) {
-        super("There is no item with this identifier: " + identifier + ". ");
+        super(identifier);
 
         this.identifierWhichDoesNotExist = identifier;
     }
